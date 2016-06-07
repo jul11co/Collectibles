@@ -1,0 +1,161 @@
+<div class="background-container">
+	<div class="background" style="background-image: url('/img/comicshop.jpg')"></div>
+</div>
+<div class="container">
+<div class="row" style="margin-bottom: 40px;">
+	<div class="col-md-12">
+		<h2>
+			Collectibles
+			<small>
+				<div class="dropdown dropdown-inline">
+				  <a class="dropdown-toggle" type="button" data-toggle="dropdown">Home
+				  <span class="caret"></span></a>
+				  <ul class="dropdown-menu">
+				    <li><a href="/magazines" onclick="loadInplace(this);return false;">Magazines</a></li>
+				    <li><a href="/comics" onclick="loadInplace(this);return false;">Comics</a></li>
+				    <li><a href="/books" onclick="loadInplace(this);return false;">Books</a></li>
+				    <li class="divider"></li>
+				    <li><a href="/reading" onclick="loadInplace(this);return false;">Reading List</a></li>
+				  </ul>
+				</div> 
+			</small>
+		</h2>
+	</div>
+
+{{#if readinglist_entries.length}}
+	<div class="col-md-12" style="margin-top: 20px;">
+		<h3><a href="/reading" onclick="loadInplace(this);return false;">READING LIST</a></h3>
+		<div class="row row-eq">
+		{{#each readinglist_entries}}
+			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+		{{#equal this.doc_type 'magazine'}}
+			<div class="issue">
+				<div class="actions">
+					<a href="/magazine_issues/{{this.issue._id}}" onclick="loadInplace(this);return false;" class="btn btn-default btn-block"><i class="fa fa-info fa-w"></i> Info</a>
+					<a href="/read/magazine/{{this.issue._id}}" class="btn btn-default btn-block"><i class="fa fa-eye fa-w"></i> Read</a> 
+					<!-- <a href="/magazines/{{this.issue.magazine}}" class="btn btn-default btn-block">Magazine</a> -->
+				</div>
+			{{#if this.issue.cover_image}}
+				<img class="cover-image" src="{{this.issue.cover_image}}">
+			{{/if}}
+				<h5 class="title">{{this.issue.name}}</h5>
+				<p class="subtitle">{{this.issue.release_year}} - {{this.issue.pages}} pages</p>
+			</div>
+		{{else}}
+		{{#equal this.doc_type 'comic'}}
+			<div class="issue">
+				<div class="actions">
+					<a href="/comic_issues/{{this.issue._id}}" onclick="loadInplace(this);return false;" class="btn btn-default btn-block"><i class="fa fa-info fa-w"></i> Info</a>
+					<a href="/read/comic/{{this.issue._id}}" class="btn btn-default btn-block"><i class="fa fa-eye fa-w"></i> Read</a> 
+					<!-- <a href="/comics/{{this.issue.serie}}" class="btn btn-default btn-block">Serie</a> -->
+				</div>
+			{{#if this.issue.cover_image}}
+				<img class="cover-image" src="{{this.issue.cover_image}}">
+			{{/if}}
+				<h5 class="title">{{this.issue.name}}</h5>
+				<p class="subtitle">{{this.issue.release_year}} - {{this.issue.pages}} pages</p>
+			</div>
+		{{else}}
+		{{#equal this.doc_type 'book'}}
+			<div class="issue">
+				<div class="actions">
+					<a href="/books/{{this.book._id}}" onclick="loadInplace(this);return false;" class="btn btn-default btn-block"><i class="fa fa-info fa-w"></i> Info</a>
+					<a href="/read/book/{{this.book._id}}" class="btn btn-default btn-block"><i class="fa fa-eye fa-w"></i> Read</a> 
+				</div>
+			{{#if this.book.cover_image}}
+				<img class="cover-image" src="{{this.book.cover_image}}">
+			{{/if}}
+				<h5 class="title">{{this.book.name}}</h5>
+				<p class="subtitle">{{this.book.pages}} pages</p>
+			</div>
+		{{/equal}}
+		{{/equal}}
+		{{/equal}}
+			</div>
+		{{/each}}
+		</div>
+	</div>
+{{/if}}
+
+	<div class="col-md-12" style="margin-top: 20px;">
+		<h3><a href="/magazines" onclick="loadInplace(this);return false;" class="text-active">MAGAZINES</a> <span style="color: gray;">{{magazines_count}}</span></h3>
+		<h5>RECENTLY PUBLISHED ISSUES</h5>
+		<div class="row row-eq">
+		{{#each magazine_issues}}
+			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+			<div class="issue">
+				<div class="actions">
+					<a href="/magazine_issues/{{this._id}}" onclick="loadInplace(this);return false;" class="btn btn-default btn-block"><i class="fa fa-info fa-w"></i> Info</a>
+					<a href="/read/magazine/{{this._id}}" class="btn btn-default btn-block"><i class="fa fa-eye fa-w"></i> Read</a> 
+					<!-- <a href="/magazines/{{this.magazine}}" class="btn btn-default btn-block">Magazine</a> -->
+				</div>
+			{{#if this.cover_image}}
+				<img class="cover-image" src="{{this.cover_image}}">
+			{{/if}}
+				<h5 class="title">{{this.name}}</h5>
+				<p class="subtitle">{{this.release_year}} - {{this.pages}} pages</p>
+			</div>
+			</div>
+		{{/each}}
+		</div>
+		<div style="text-align: center;margin-top: 20px;">
+			<a href="/magazine_issues" onclick="loadInplace(this);return false;" class="btn btn-primary">View All</a>
+		</div>
+	</div>
+
+	<div class="col-md-12" style="margin-top: 20px;">
+		<h3><a href="/comics" onclick="loadInplace(this);return false;" class="text-active">COMIC SERIES</a> <span style="color: gray;">{{comic_series_count}}</span></h3>
+		<h5>RECENTLY PUBLISHED ISSUES</h5>
+		<div class="row row-eq">
+		{{#each comic_issues}}
+			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+			<div class="issue">
+				<div class="actions">
+					<a href="/comic_issues/{{this._id}}" onclick="loadInplace(this);return false;" class="btn btn-default btn-block"><i class="fa fa-info fa-w"></i> Info</a>
+					<a href="/read/comic/{{this._id}}" class="btn btn-default btn-block"><i class="fa fa-eye fa-w"></i> Read</a> 
+					<!-- <a href="/comics/{{this.serie}}" class="btn btn-default btn-block">Serie</a> -->
+				</div>
+			{{#if this.cover_image}}
+				<img class="cover-image" src="{{this.cover_image}}">
+			{{/if}}
+				<h5 class="title">{{this.name}}</h5>
+				<p class="subtitle">{{this.release_year}} - {{this.pages}} pages</p>
+			</div>
+			</div>
+		{{/each}}
+		</div>
+		<div style="text-align: center;margin-top: 20px;">
+			<a href="/comic_issues" onclick="loadInplace(this);return false;" class="btn btn-primary">View All</a>
+		</div>
+	</div>
+	<div class="col-md-12" style="margin-top: 20px;">
+		<h3><a href="/books" onclick="loadInplace(this);return false;" class="text-active">BOOKS</a> <span style="color: gray;">{{books_count}}</span></h3>
+		<h5>RECENTLY ADDED</h5>
+		<div class="row row-eq">
+		{{#each books}}
+			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+			<div class="issue">
+				<div class="actions">
+					<a href="/books/{{this._id}}" onclick="loadInplace(this);return false;" class="btn btn-default btn-block"><i class="fa fa-info fa-w"></i> Info</a>
+					<a href="/read/book/{{this._id}}" class="btn btn-default btn-block"><i class="fa fa-eye fa-w"></i> Read</a> 
+				</div>
+			{{#if this.cover_image}}
+				<img class="cover-image" src="{{this.cover_image}}">
+			{{/if}}
+				<h5 class="title">{{this.name}}</h5>
+				<p class="subtitle">{{this.pages}} pages</p>
+			</div>
+			</div>
+		{{/each}}
+		</div>
+		<div style="text-align: center;margin-top: 20px;">
+			<a href="/books" onclick="loadInplace(this);return false;" class="btn btn-primary">View All</a>
+		</div>
+	</div>
+</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.row-eq').rowequalizer();
+	});
+</script>

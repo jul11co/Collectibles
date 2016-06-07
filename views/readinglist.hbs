@@ -1,0 +1,101 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-brand">
+    	<h1 style="margin: 0;">
+			<a href="#" onclick="goBack();return false;" class="back-button"><i class="fa fa-chevron-left fa-fw"></i></a>
+			<a href="/" onclick="loadInplace(this);return false;"><i class="fa fa-home"></i></a> 
+		</h1>
+    </div>
+  </div>
+</nav>
+<div class="main-content">
+<div class="background-container">
+	<div class="background" style="background-image: url('/img/comicshop.jpg')"></div>
+</div>
+<div class="container">
+<div class="row" style="margin-bottom: 40px;">
+	<div class="col-md-12" style="margin-top: 20px;">
+		<h3><a href="/reading" onclick="loadInplace(this);return false;">READING LIST</a></h3>
+		<h4>
+			<span class="text-active">STUFF YOU'VE READ</span>
+		{{#if entries.length}}
+			{{#if skip}}
+			<span class="label label-default">{{math skip '+' 1}} - {{math skip '+' entries.length}} of {{count}}</span>
+			{{else}}
+			<span class="label label-default">1 - {{entries.length}} of {{count}}</span>
+			{{/if}}
+		{{else}}
+			<span class="label label-default">0</span>
+		{{/if}}
+		</h4>
+		<div class="row row-eq">
+		{{#each entries}}
+			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+			{{#equal this.doc_type 'magazine'}}
+			<div class="issue">
+				<div class="actions">
+					<a href="/magazine_issues/{{this.issue._id}}" onclick="loadInplace(this);return false;" class="btn btn-default btn-block"><i class="fa fa-info fa-w"></i> Info</a>
+					<a href="/read/magazine/{{this.issue._id}}" class="btn btn-default btn-block"><i class="fa fa-eye fa-w"></i> Read</a> 
+					<!-- <a href="/magazines/{{this.issue.magazine}}" class="btn btn-default btn-block">Magazine</a> -->
+				</div>
+			{{#if this.issue.cover_image}}
+				<img class="cover-image" src="{{this.issue.cover_image}}">
+			{{/if}}
+				<h5 class="title">{{this.issue.name}}</h5>
+				<p class="subtitle">{{this.issue.release_year}} - {{this.issue.pages}} pages</p>
+			</div>
+		{{else}}
+		{{#equal this.doc_type 'comic'}}
+			<div class="issue">
+				<div class="actions">
+					<a href="/comic_issues/{{this.issue._id}}" onclick="loadInplace(this);return false;" class="btn btn-default btn-block"><i class="fa fa-info fa-w"></i> Info</a>
+					<a href="/read/comic/{{this.issue._id}}" class="btn btn-default btn-block"><i class="fa fa-eye fa-w"></i> Read</a> 
+					<!-- <a href="/comics/{{this.issue.serie}}" class="btn btn-default btn-block">Serie</a> -->
+				</div>
+			{{#if this.issue.cover_image}}
+				<img class="cover-image" src="{{this.issue.cover_image}}">
+			{{/if}}
+				<h5 class="title">{{this.issue.name}}</h5>
+				<p class="subtitle">{{this.issue.release_year}} - {{this.issue.pages}} pages</p>
+			</div>
+		{{else}}
+		{{#equal this.doc_type 'book'}}
+			<div class="issue">
+				<div class="actions">
+					<a href="/books/{{this.book._id}}" onclick="loadInplace(this);return false;" class="btn btn-default btn-block"><i class="fa fa-info fa-w"></i> Info</a>
+					<a href="/read/book/{{this.book._id}}" class="btn btn-default btn-block"><i class="fa fa-eye fa-w"></i> Read</a> 
+				</div>
+			{{#if this.book.cover_image}}
+				<img class="cover-image" src="{{this.book.cover_image}}">
+			{{/if}}
+				<h5 class="title">{{this.book.name}}</h5>
+				<p class="subtitle">{{this.book.pages}} pages</p>
+			</div>
+		{{/equal}}
+		{{/equal}}
+		{{/equal}}
+			</div>
+		{{/each}}
+		</div>
+	{{#if entries.length}}
+	{{#equal entries.length limit}}
+		<div class="row" style="margin-top: 20px;text-align: center;">
+			<div class="col-md-12">
+		{{#if skip}}
+			<a href="/reading?skip={{math skip '+' entries.length}}" onclick="loadInplace(this);return false;" class="btn btn-primary">More</a>
+		{{else}}
+			<a href="/reading?skip={{entries.length}}" onclick="loadInplace(this);return false;" class="btn btn-primary">More</a>
+		{{/if}}
+			</div>
+		</div>
+	{{/equal}}
+	{{/if}}
+	</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.row-eq').rowequalizer();
+	});
+</script>

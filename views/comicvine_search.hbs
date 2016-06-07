@@ -1,0 +1,107 @@
+{{> comicvine_navbar}}
+<div class="main-content">
+<div class="background-container">
+	<div class="background" style="background-image: url('/img/comicvine.png')"></div>
+</div>
+<div class="container">
+<div class="row" style="margin-bottom: 40px;">
+	<div class="col-md-12">
+		<h3 class="breadcrumb">
+			<div class="dropdown dropdown-inline">
+			  <a class="dropdown-toggle" type="button" data-toggle="dropdown">ComicVine
+			  <span class="caret"></span></a>
+			  <ul class="dropdown-menu">
+			    <li><a href="/magazines" onclick="loadInplace(this);return false;">Magazines</a></li>
+			    <li><a href="/comics" onclick="loadInplace(this);return false;">Comics</a></li>
+			    <li><a href="/books" onclick="loadInplace(this);return false;">Books</a></li>
+			    <li class="divider"></li>
+			    <li><a href="/comicvine" onclick="loadInplace(this);return false;">ComicVine</a></li>
+			  </ul>
+			</div> 
+			{{#if query.q}}
+			<i class="fa fa-angle-right fa-fw"></i> 
+			Results for "{{query.q}}"
+			{{/if}}
+		</h3>
+	</div>
+	<div class="col-md-12" style="text-align: center;">
+		<h5><span id="search-results-loading" class="hidden"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i></span></h5>
+	</div>
+	<div id="search-results">
+	</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+
+	  window.ajaxRequest = function(params, callback) {
+	    $.ajax(params)
+	      .success(function(result) {
+	          callback(null, result);
+	      })
+	      .error(function(err) {
+	          console.log(err);
+	          callback(err);
+	      });
+	  }
+
+	  var performSearch = function(query, options) {
+		  $('#search-results-loading').removeClass('hidden');
+		  var url = "/comicvine/search_results?q=" + query;
+		  if (options.type) {
+		  	url += '&type=' + options.type;
+		  }
+		  if (options.limit) {
+		  	url += '&limit=' + options.limit;
+		  }
+		  if (options.skip) {
+		  	url += '&type=' + options.skip;
+		  }
+		  if (options.page) {
+		  	url += '&page=' + options.page;
+		  }
+		  ajaxRequest({
+	        method: "GET",
+	        url: url,
+	      }, function(err, result) {
+	      	$('#search-results-loading').addClass('hidden');
+	      	if (err) {
+	      	  console.log(err);
+	      	} else if (result) {
+			  $('#search-results').html(result);
+			  $('.row-eq').rowequalizer();
+	      	}
+	      });
+	  }
+
+	 //  $('#search-form').submit(function(e) {
+	 //  	e.preventDefault();
+
+		// var query = $('#search-query').val();
+		// if (query && query != '') {
+		//   var options = {};
+		//   options.type = $('input[name=type]:checked', '#search-form').val();
+		//   performSearch(query, options);
+		// }
+	 //  });
+
+	  var query = $('#search-query').val();
+	  if (query && query != '') {
+	  	var options = {};
+	  	{{#if query.type}}
+		options.type = '{{query.type}}';
+		{{/if}}
+		{{#if query.limit}}
+		options.limit = {{query.limit}};
+		{{/if}}
+		{{#if query.skip}}
+		options.skip = {{query.skip}};
+		{{/if}}
+		{{#if query.page}}
+		options.page = {{query.page}};
+		{{/if}}
+	  	performSearch(query, options);
+	  }
+	});
+</script>

@@ -1,0 +1,107 @@
+{{> magazine_navbar}}
+<div class="main-content">
+{{#if issues.length}}
+	{{#if issues.0.cover_image}}
+<div class="background-container">
+	<div class="background" style="background-image: url('{{issues.0.cover_image}}')"></div>
+</div>
+	{{/if}}
+{{else}}
+<div class="background-container">
+	<div class="background" style="background-image: url('/img/magazine-rack.jpg')"></div>
+</div>
+{{/if}}
+<div class="container">
+<div class="row" style="margin-bottom: 40px;">
+	<div class="col-md-12">
+		<h3 class="breadcrumb">
+			<div class="dropdown dropdown-inline">
+			  <a class="dropdown-toggle" type="button" data-toggle="dropdown">Magazines
+			  <span class="caret"></span></a>
+			  <ul class="dropdown-menu">
+			    <li><a href="/magazines" onclick="loadInplace(this);return false;">Magazines</a></li>
+			    <li><a href="/comics" onclick="loadInplace(this);return false;">Comics</a></li>
+			    <li><a href="/books" onclick="loadInplace(this);return false;">Books</a></li>
+			  </ul>
+			</div> 
+			<div style="display: inline-block;vertical-align: top;margin-left: 10px;">
+				<ul class="nav nav-pills">
+				  <li><a href="/magazines" onclick="loadInplace(this);return false;">Titles</a></li>
+				  <li class="active"><a href="/magazine_issues" onclick="loadInplace(this);return false;">Issues</a></li>
+				</ul>
+			</div>
+		</h3>
+	</div>
+	<div class="col-md-12">
+		<h4>
+			<div class="dropdown dropdown-inline active">
+			{{#equal query.sort 'added_date'}}
+			  <a class="dropdown-toggle" type="button" data-toggle="dropdown" style="color: orange;">RECENTLY ADDED
+			{{else}}
+			  <a class="dropdown-toggle" type="button" data-toggle="dropdown" style="color: orange;">RECENTLY PUBLISHED
+			{{/equal}}
+			  <span class="caret"></span></a>
+			  <ul class="dropdown-menu">
+			    <li><a href="/magazine_issues?sort=published_date" onclick="loadInplace(this);return false;">RECENTLY PUBLISHED</a></li>
+			    <li><a href="/magazine_issues?sort=added_date" onclick="loadInplace(this);return false;">RECENTLY ADDED</a></li>
+			  </ul>
+			</div>
+		{{#if issues.length}}
+			{{#if skip}}
+			<span class="label label-default">{{math skip '+' 1}} - {{math skip '+' issues.length}} of {{count}}</span>
+			{{else}}
+			<span class="label label-default">1 - {{issues.length}} of {{count}}</span>
+			{{/if}}
+		{{else}}
+			<span class="label label-default">0</span>
+		{{/if}}
+		</h4>
+		<div class="row row-eq">
+		{{#each issues}}
+			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+			<div class="issue">
+				<div class="actions">
+					<a href="/magazine_issues/{{this._id}}" onclick="loadInplace(this);return false;" class="btn btn-default btn-block"><i class="fa fa-info fa-w"></i> Info</a>
+					<a href="/read/magazine/{{this._id}}" class="btn btn-default btn-block"><i class="fa fa-eye fa-w"></i> Read</a> 
+					<!-- <a href="/magazines/{{this.magazine}}" class="btn btn-default btn-block">Magazine</a> -->
+					<!-- <a href="/magazine_issues/{{this._id}}/delete" class="btn btn-danger btn-block">Delete</a> -->
+				</div>
+			{{#if this.cover_image}}
+				<img class="cover-image" src="{{this.cover_image}}">
+			{{/if}}
+				<h5 class="title">{{this.name}}</h5>
+				<p class="subtitle">{{this.release_year}} - {{this.pages}} pages</p>
+			</div>
+			</div>
+		{{/each}}
+		</div>
+	{{#if issues.length}}
+	{{#equal issues.length limit}}
+		<div class="row" style="margin-top: 20px;text-align: center;">
+			<div class="col-md-12">
+		{{#equal query.sort 'added_date'}}
+			{{#if skip}}
+				<a href="/magazine_issues?sort=added_date&skip={{math skip '+' issues.length}}" onclick="loadInplace(this);return false;" class="btn btn-primary">More</a>
+			{{else}}
+				<a href="/magazine_issues?sort=added_date&skip={{issues.length}}" onclick="loadInplace(this);return false;" class="btn btn-primary">More</a>
+			{{/if}}
+		{{else}}
+			{{#if skip}}
+				<a href="/magazine_issues?skip={{math skip '+' issues.length}}" onclick="loadInplace(this);return false;" class="btn btn-primary">More</a>
+			{{else}}
+				<a href="/magazine_issues?skip={{issues.length}}" onclick="loadInplace(this);return false;" class="btn btn-primary">More</a>
+			{{/if}}
+		{{/equal}}
+			</div>
+		</div>
+	{{/equal}}
+	{{/if}}
+	</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.row-eq').rowequalizer();
+	});
+</script>

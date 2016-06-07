@@ -1,0 +1,116 @@
+{{> comicvine_navbar}}
+<div class="main-content">
+{{#if issues.length}}
+	{{#if issues.0.image}}	
+	{{#if issues.0.image.medium_url}}
+<div class="background-container">
+	<div class="background" style="background-image: url('{{issues.0.image.medium_url}}')"></div>
+</div>
+	{{/if}}
+	{{/if}}
+{{else}}
+<div class="background-container">
+	<div class="background" style="background-image: url('/img/comicvine.png')"></div>
+</div>
+{{/if}}
+<div class="container">
+<div class="row" style="margin-bottom: 40px;">
+	<div class="col-md-12">
+		<h3 class="breadcrumb">
+			<div class="dropdown dropdown-inline">
+			  <a class="dropdown-toggle" type="button" data-toggle="dropdown">ComicVine
+			  <span class="caret"></span></a>
+			  <ul class="dropdown-menu">
+			    <li><a href="/magazines" onclick="loadInplace(this);return false;">Magazines</a></li>
+			    <li><a href="/comics" onclick="loadInplace(this);return false;">Comics</a></li>
+			    <li><a href="/books" onclick="loadInplace(this);return false;">Books</a></li>
+			    <li class="divider"></li>
+			    <li><a href="/comicvine" onclick="loadInplace(this);return false;">ComicVine</a></li>
+			  </ul>
+			</div> 
+			<div style="display: inline-block;vertical-align: top;margin-left: 10px;">
+				<ul class="nav nav-pills">
+				  <li><a href="/comicvine/volumes" onclick="loadInplace(this);return false;">Volumes</a></li>
+				  <li class="active"><a href="/comicvine/issues" onclick="loadInplace(this);return false;">Issues</a></li>
+				</ul>
+			</div>
+		</h3>
+	</div>
+	<div class="col-md-12" style="margin-top: 10px;">
+		<h4>
+			<span class="text-active">ISSUES</span>
+		{{#if issues.length}}
+			{{#if offset}}
+			<span class="label label-default">{{math offset '+' 1}} - {{math offset '+' issues.length}} of {{count}}</span>
+			{{else}}
+			<span class="label label-default">1 - {{issues.length}} of {{count}}</span>
+			{{/if}}
+		{{else}}
+			<span class="label label-default">0</span>
+		{{/if}}
+		</h4>
+		<div class="row row-eq">
+		{{#each issues}}
+			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+			<div class="issue">
+				<div class="actions">
+				{{#if this.id}}
+					<a href="/comicvine/issues/4000-{{this.id}}" onclick="loadInplace(this);return false;" class="btn btn-default btn-block"><i class="fa fa-info fa-w"></i> Info</a>
+				{{/if}}
+				{{#if this.volume}}
+					{{#if this.volume.name}}
+					<a href="/comicvine/search?q={{encodeURI this.volume.name}}&type=volume" onclick="loadInplace(this);return false;" class="btn btn-default btn-block"><i class="fa fa-search fa-w"></i> Volume</a>
+					{{/if}}
+				{{/if}}
+				{{#if this.site_detail_url}}
+					<a href="{{this.site_detail_url}}" target="_blank" class="btn btn-success btn-block">ComicVine</a>
+				{{/if}}
+				</div>
+			{{#if this.image}}
+				{{#if this.image.medium_url}}
+				<img class="cover-image" src="{{this.image.medium_url}}">
+				{{/if}}
+			{{/if}}
+			{{#if this.volume}}
+				{{#if this.volume.name}}
+				<h5 class="title">{{this.volume.name}} #{{this.issue_number}}</h5>
+				{{/if}}
+				{{#if this.name}}
+				<p class="subtitle" style="margin-bottom: 0;">{{this.name}}</p>
+				{{/if}}
+			{{else}}
+				{{#if this.name}}
+				<h5 class="title">{{this.name}}</h5>
+				{{/if}}
+			{{/if}}
+				<p class="subtitle">
+				{{#if this.cover_date}}
+				 {{this.cover_date}}
+				{{/if}}
+				</p>
+			</div>
+			</div>
+		{{/each}}
+		</div>
+	{{#if issues.length}}
+	{{#equal issues.length limit}}
+		<div class="row" style="margin-top: 20px;text-align: center;">
+			<div class="col-md-12">
+		{{#if offset}}
+			<a href="/comicvine/issues?offset={{math offset '+' issues.length}}" onclick="loadInplace(this);return false;" class="btn btn-primary">More Issues</a>
+		{{else}}
+			<a href="/comicvine/issues?offset={{issues.length}}" onclick="loadInplace(this);return false;" class="btn btn-primary">More Issues</a>
+		{{/if}}
+			</div>
+		</div>
+	{{/equal}}
+	{{/if}}
+	</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.row-eq').rowequalizer();
+	});
+</script>

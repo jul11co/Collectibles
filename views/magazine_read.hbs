@@ -1,0 +1,110 @@
+{{> magazine_navbar}}
+<div class="main-content">
+<div class="background-container">
+	<div class="background" style="background-image: url('/img/magazine-rack.jpg')"></div>
+</div>
+<div class="container">
+<div class="row" style="margin-bottom: 40px;">
+	<div class="col-md-12">
+		<h3 class="breadcrumb">
+			Reading: {{issue.name}}
+		</h3>
+	</div>
+	<div class="col-md-12" style="margin-top: 10px;">
+		<input id="reader-width" type="range" step="5" value="100">
+	</div>
+	<div class="col-md-12" style="text-align: center;margin-top: 20px;">
+		<span id="images-loading" class="hidden"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i></span>
+	</div>
+	<div class="col-md-12" style="margin-top: 20px;">
+		<div id="images" style="margin: 0 auto;"></div>
+	</div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/rangeslider/rangeslider.css">
+<style type="text/css">
+.rangeslider__handle {
+  border-radius: 22px;
+  min-width: 62px;
+  line-height: 42px;
+  text-align: center;
+  font-size: 12px;
+  color: #444;
+  
+  &:after {
+    background: 0;
+  }
+}
+/*.rangeslider__fill {
+  background: #ffde38;
+}*/
+#images img {
+  max-width: 100%;
+  padding: 5px;
+}
+</style>
+<!-- <script src="/jquery/jquery.min.js" type="text/javascript"></script> -->
+<script src="/rangeslider/rangeslider.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+
+	  window.ajaxRequest = function(params, callback) {
+	    $.ajax(params)
+	      .success(function(result) {
+	          callback(null, result);
+	      })
+	      .error(function(err) {
+	          console.log(err);
+	          callback(err);
+	      });
+	  }
+
+	  // $('input[type="range"]').rangeslider();
+
+	  var $element = $('input[type="range"]');
+	  var $handle;
+
+	  $element
+		.rangeslider({
+		  polyfill: false,
+		  onInit: function() {
+		    $handle = $('.rangeslider__handle', this.$range);
+		    updateHandle($handle[0], this.value);
+		  }
+		})
+		.on('input', function() {
+		  updateHandle($handle[0], this.value);
+		  var value = this.value;
+		  setTimeout(function() {
+		  	updateImagesWidth(value);
+		  }, 50);
+		});
+
+      function updateHandle(el, val) {
+		el.textContent = val;
+      }
+
+      function updateImagesWidth(val) {
+      	$('#images img').css('width', val + '%');
+      }
+
+	  $('#images-loading').removeClass('hidden');
+	  ajaxRequest({
+        method: "GET",
+        url: "/read/magazine/{{issue._id}}/start",
+      }, function(err, result) {
+      	$('#images-loading').addClass('hidden');
+      	if (err) {
+      		console.log(err);
+      	} else if (result && result.images) {
+      		if (result.images.length) {
+      			result.images.forEach(function(image) {
+      				$('#images').append('<img src="' + image + '">');
+      			});
+      		}
+      	}
+      });
+
+	});
+</script>

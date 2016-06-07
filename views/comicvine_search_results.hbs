@@ -1,0 +1,137 @@
+{{#if issues}}
+	<div class="col-md-12" style="margin-bottom: 20px;">
+		<h4>
+			<span class="text-active">ISSUES</span>
+		{{#if issues.length}}
+			{{#if offset}}
+			<span class="label label-default">{{math offset '+' 1}} - {{math offset '+' issues.length}} of {{count}}</span>
+			{{else}}
+			<span class="label label-default">1 - {{issues.length}} of {{count}}</span>
+			{{/if}}
+		{{else}}
+			<span class="label label-default">0</span>
+		{{/if}}
+		</h4>
+		<div class="row row-eq">
+		{{#each issues}}
+			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+			<div class="issue">
+				<div class="actions">
+				{{#if this.id}}
+					<a href="/comicvine/issues/4000-{{this.id}}" onclick="loadInplace(this);return false;" class="btn btn-default btn-block"><i class="fa fa-info fa-w"></i> Info</a>
+				{{/if}}
+				{{#if this.volume}}
+					{{#if this.volume.id}}
+					<a href="/comicvine/volumes/4050-{{this.volume.id}}" onclick="loadInplace(this);return false;" class="btn btn-default btn-block">Volume</a>
+					{{/if}}
+				{{/if}}
+				{{#if this.site_detail_url}}
+					<a href="{{this.site_detail_url}}" target="_blank" class="btn btn-success btn-block">ComicVine</a>
+				{{/if}}
+				</div>
+			{{#if this.image}}
+				{{#if this.image.medium_url}}
+				<img class="cover-image" src="{{this.image.medium_url}}">
+				{{/if}}
+			{{/if}}
+			{{#if this.volume}}
+				{{#if this.volume.name}}
+				<h5 class="title">{{this.volume.name}} #{{this.issue_number}}</h5>
+				{{/if}}
+				{{#if this.name}}
+				<p class="subtitle" style="margin-bottom: 0;">{{this.name}}</p>
+				{{/if}}
+			{{else}}
+				{{#if this.name}}
+				<h5 class="title">{{this.name}}</h5>
+				{{/if}}
+			{{/if}}
+				<p class="subtitle">
+				{{#if this.cover_date}}
+				{{this.cover_date}}
+				{{/if}}
+				</p>
+			</div>
+			</div>
+		{{/each}}
+		</div>
+	{{#if issues.length}}
+	{{#equal issues.length limit}}
+		<div class="row" style="margin-top: 20px;text-align: center;">
+			<div class="col-md-12">
+		{{#if page}}
+			<a href="/comicvine/search?q={{encodeURI query.q}}&type=issue&page={{math page '+' 1}}" onclick="loadInplace(this);return false;" class="btn btn-primary">More Issues</a>
+		{{else}}
+			<a href="/comicvine/search?q={{encodeURI query.q}}&type=issue&page=2" onclick="loadInplace(this);return false;" class="btn btn-primary">More Issues</a>
+		{{/if}}
+			</div>
+		</div>
+	{{/equal}}
+	{{/if}}
+	</div>
+{{/if}}
+
+{{#if volumes}}
+	<div class="col-md-12">
+		<h4>
+			<span class="text-active">VOLUMES</span>
+		{{#if volumes.length}}
+			{{#if offset}}
+			<span class="label label-default">{{math offset '+' 1}} - {{math offset '+' volumes.length}} of {{count}}</span>
+			{{else}}
+			<span class="label label-default">1 - {{volumes.length}} of {{count}}</span>
+			{{/if}}
+		{{else}}
+			<span class="label label-default">0</span>
+		{{/if}}
+		</h4>
+		<div class="row row-eq">
+		{{#each volumes}}
+			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+			<div class="issue">
+				<div class="actions">
+				{{#if this.id}}
+					<a href="/comicvine/volumes/4050-{{this.id}}" onclick="loadInplace(this);return false;" class="btn btn-default btn-block"><i class="fa fa-info fa-w"></i> Info</a>
+				{{/if}}
+				{{#if this.site_detail_url}}
+					<a href="{{this.site_detail_url}}" target="_blank" class="btn btn-success btn-block">ComicVine</a>
+				{{/if}}
+				</div>
+			{{#if this.image}}
+				{{#if this.image.medium_url}}
+				<img class="cover-image" src="{{this.image.medium_url}}">
+				{{/if}}
+			{{/if}}
+			{{#if this.name}}
+				<h5 class="title">{{this.name}}</h5>
+			{{/if}}
+				<p class="subtitle">
+				{{#if this.start_year}}
+				{{this.start_year}}
+				{{/if}}
+				{{#if this.count_of_issues}}
+				{{#if this.start_year}}
+				 - 
+				{{/if}}
+				{{this.count_of_issues}} issues
+				{{/if}}
+				 </p>
+			</div>
+			</div>
+		{{/each}}
+		</div>
+	{{#if volumes.length}}
+	{{#equal volumes.length limit}}
+		<div class="row" style="margin-top: 20px;text-align: center;">
+			<div class="col-md-12">
+		{{#if page}}
+			<a href="/comicvine/search?q={{encodeURI query.q}}&type=volume&page={{math page '+' 1}}" onclick="loadInplace(this);return false;" class="btn btn-primary">More Volumes</a>
+		{{else}}
+			<a href="/comicvine/search?q={{encodeURI query.q}}&type=volume&page=2" onclick="loadInplace(this);return false;" class="btn btn-primary">More Volumes</a>
+		{{/if}}
+			</div>
+		</div>
+	{{/equal}}
+	{{/if}}
+	</div>
+{{/if}}

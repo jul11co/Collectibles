@@ -1,0 +1,103 @@
+{{> comic_navbar}}
+<div class="main-content">
+<div class="background-container">
+	<div class="background" style="background-image: url('/img/comics.jpg')"></div>
+</div>
+<div class="container">
+<div class="row" style="margin-bottom: 40px;">
+	<div class="col-md-12">
+		<h3 class="breadcrumb">
+			<div class="dropdown dropdown-inline">
+			  <a class="dropdown-toggle" type="button" data-toggle="dropdown">Comics
+			  <span class="caret"></span></a>
+			  <ul class="dropdown-menu">
+			    <li><a href="/magazines" onclick="loadInplace(this);return false;">Magazines</a></li>
+			    <li><a href="/comics" onclick="loadInplace(this);return false;">Comics</a></li>
+			    <li><a href="/books" onclick="loadInplace(this);return false;">Books</a></li>
+			    <li class="divider"></li>
+			    <li><a href="/comicvine" onclick="loadInplace(this);return false;">ComicVine</a></li>
+			  </ul>
+			</div>
+			<div style="display: inline-block;vertical-align: top;margin-left: 10px;">
+				<ul class="nav nav-pills">
+				  <li class="active"><a href="/comics" onclick="loadInplace(this);return false;">Series</a></li>
+				  <li><a href="/comic_issues" onclick="loadInplace(this);return false;">Issues</a></li>
+				</ul>
+			</div>
+		</h3>
+	</div>
+	<div class="col-md-12">
+		<h4>
+			<span class="text-active">RECENTLY ADDED</span>
+		{{#if series.length}}
+			{{#if skip}}
+			<span class="label label-default">{{math skip '+' 1}} - {{math skip '+' series.length}} of {{count}}</span>
+			{{else}}
+			<span class="label label-default">1 - {{series.length}} of {{count}}</span>
+			{{/if}}
+		{{else}}
+			<span class="label label-default">0</span>
+		{{/if}}
+		</h4>
+		<div class="row row-eq">
+		{{#each series}}
+			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+			<div class="row">
+
+
+			{{#if this.issues}}
+			<div class="col-md-12">
+			{{#each this.issues}}
+				<div class="issue">
+					<div class="actions">
+						<a href="/comic_issues/{{this._id}}" class="btn btn-default btn-block" onclick="loadInplace(this);return false;"><i class="fa fa-info fa-w"></i> Info</a>
+						<a href="/read/comic/{{this._id}}" class="btn btn-default btn-block"><i class="fa fa-eye fa-w"></i> Read</a> 
+						<!-- <a href="/comics/{{this.serie}}" class="btn btn-default btn-block">Serie</a> -->
+						<!-- <a href="/comic_issues/{{this._id}}/delete" class="btn btn-danger btn-block">Delete</a> -->
+					</div>
+				{{#if this.cover_image}}
+					<img class="cover-image" src="{{this.cover_image}}">
+				{{/if}}
+					<!-- <h5 class="title title-ellipsis">{{this.name}}</h5>
+					<p class="subtitle">{{this.release_year}} - {{this.pages}} pages</p> -->
+				</div>
+			{{/each}}
+			</div>
+			{{/if}}
+
+			<div class="col-md-12">
+				<div class="serie">
+			{{#if this.cover_image}}
+					<img class="cover-image" src="{{this.cover_image}}">
+			{{/if}}
+					<h5 class="title"><a href="/comics/{{this._id}}" onclick="loadInplace(this);return false;">{{this.name}}</a></h5>
+				</div>
+			</div>
+
+			</div>
+			</div>
+		{{/each}}
+		</div>
+
+	{{#if series.length}}
+	{{#equal series.length limit}}
+		<div class="row" style="margin-top: 20px;text-align: center;">
+			<div class="col-md-12">
+		{{#if skip}}
+			<a href="/comics?skip={{math skip '+' series.length}}" onclick="loadInplace(this);return false;" class="btn btn-primary">More</a>
+		{{else}}
+			<a href="/comics?skip={{series.length}}" onclick="loadInplace(this);return false;" class="btn btn-primary">More</a>
+		{{/if}}
+			</div>
+		</div>
+	{{/equal}}
+	{{/if}}
+	</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.row-eq').rowequalizer();
+	});
+</script>

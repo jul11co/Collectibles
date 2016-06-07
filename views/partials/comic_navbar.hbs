@@ -1,0 +1,20 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+
+    <div class="navbar-brand">
+    	<h1 style="margin: 0;">
+  			<a href="#" onclick="goBack();return false;" class="back-button"><i class="fa fa-chevron-left fa-fw"></i></a>
+  			<a href="/" onclick="loadInplace(this);return false;"><i class="fa fa-home"></i></a> 
+  		</h1>
+    </div>
+
+    <div id="navbar-main">
+    	<div class="navbar-search">
+			  <form id="search-form" class="form-horizontal" action="/comics/search">
+          <input id="search-query" name="q" type="text" class="form-control" placeholder="Search comic series, issues..." value="{{query.q}}">
+        </form>
+		  </div>
+    </div>
+
+  </div>
+</nav>

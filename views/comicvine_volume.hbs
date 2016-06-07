@@ -1,0 +1,96 @@
+{{> comicvine_navbar}}
+<div class="main-content">
+{{#if volume.image}}
+	{{#if volume.image.medium_url}}
+<div class="background-container">
+	<div class="background" style="background-image: url('{{volume.image.medium_url}}')"></div>
+</div>
+	{{/if}}
+{{else}}
+<div class="background-container">
+	<div class="background" style="background-image: url('/img/comicvine.png')"></div>
+</div>
+{{/if}}
+<div class="container">
+<div class="row" style="margin-bottom: 40px;">
+	<div class="col-md-12" style="margin-bottom: 20px;">
+		<h3 class="breadcrumb">
+			<div class="dropdown dropdown-inline">
+			  <a class="dropdown-toggle" type="button" data-toggle="dropdown">ComicVine
+			  <span class="caret"></span></a>
+			  <ul class="dropdown-menu">
+			    <li><a href="/magazines" onclick="loadInplace(this);return false;">Magazines</a></li>
+			    <li><a href="/comics" onclick="loadInplace(this);return false;">Comics</a></li>
+			    <li><a href="/books" onclick="loadInplace(this);return false;">Books</a></li>
+			    <li class="divider"></li>
+			    <li><a href="/comicvine" onclick="loadInplace(this);return false;">ComicVine</a></li>
+			  </ul>
+			</div> 
+			<i class="fa fa-angle-right fa-fw"></i> 
+			<div class="dropdown dropdown-inline active">
+			  <a class="dropdown-toggle" type="button" data-toggle="dropdown">Volumes
+			  <span class="caret"></span></a>
+			  <ul class="dropdown-menu">
+			    <li><a href="/comicvine/volumes" onclick="loadInplace(this);return false;">Volumes</a></li>
+			    <li><a href="/comicvine/issues" onclick="loadInplace(this);return false;">Issues</a></li>
+			  </ul>
+			</div> 
+			<i class="fa fa-angle-right fa-fw"></i> 
+			{{volume.name}}
+		</h3>
+	</div>
+	<div class="col-md-4 col-sm-6">
+	{{#if volume.image}}
+		{{#if volume.image.medium_url}}
+		<img src="{{volume.image.medium_url}}" class="img-responsive cover-image-big">
+		{{/if}}
+	{{/if}}
+	</div>
+	<div class="col-md-8 col-sm-6">
+		<h2 class="issue-title"><span>{{volume.name}}</span></h2>
+		<hr/>
+	{{#if volume.publisher}}
+		<div class="metadata">
+			<span class="metadata-label">Publisher</span>
+			<span>{{volume.publisher.name}}</span>
+		</div>
+	{{/if}}
+	{{#if volume.start_year}}
+		<div class="metadata">
+			<span class="metadata-label">Start Year</span>
+			<span>{{volume.start_year}}</span>
+		</div>
+	{{/if}}
+	{{#if volume.count_of_issues}}
+		<div class="metadata">
+			<span class="metadata-label">Number of Issues</span>
+			<span>{{volume.count_of_issues}}</span>
+		</div>
+	{{/if}}
+	{{#if volume.description}}
+		<hr/>
+		<div class="well">{{{volume.description}}}</div>
+		<hr/>
+	{{/if}}
+	{{#if volume.issues}}
+		<div class="metadata">
+			<span class="metadata-label">ISSUES</span>
+		</div>
+		<ul class="volume-issues-list">
+		{{#each volume.issues}}
+			{{#if this.name}}
+			<li><a href="/comicvine/issues/4000-{{this.id}}" onclick="loadInplace(this);return false;">{{this.name}}</a> - #{{this.issue_number}}</li>
+			{{else}}
+			<li><a href="/comicvine/issues/4000-{{this.id}}" onclick="loadInplace(this);return false;">{{../volume.name}}</a> - #{{this.issue_number}}</li>
+			{{/if}}
+		{{/each}}
+		</ul>
+	{{/if}}
+	{{#if volume.site_detail_url}}
+		<hr/>
+		<a href="{{volume.site_detail_url}}" target="_blank" class="btn btn-success"><i class="fa fa-external-link fa-w"></i> ComicVine</a> 
+	{{/if}}
+	</div>
+</div>
+</div>
+</div>

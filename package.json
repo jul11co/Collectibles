@@ -1,0 +1,32 @@
+{
+  "name": "jul11co-collectibles",
+  "version": "0.0.1",
+  "description": "Manage personal collections of books, magazines, comics",
+  "author:": "Jul11Co (jul.eleven.co@gmail.com)",
+  "bin": {
+    "collectibles-scanner": "./app/scanner.js",
+    "collectibles-server": "./app/server.js"
+  },
+  "script": {
+    "start": "node app/server.js"
+  },
+  "dependencies": {
+    "async": "^1.5.2",
+    "body-parser": "^1.15.1",
+    "cookie-parser": "^1.4.3",
+    "easyimage": "^2.1.0",
+    "express": "^4.13.4",
+    "express-handlebars": "^3.0.0",
+    "fs-extra": "^0.30.0",
+    "hbs": "^4.0.0",
+    "leveldown": "^1.4.6",
+    "levelup": "^1.3.2",
+    "md5-file": "^3.1.0",
+    "mkdirp": "^0.5.1",
+    "morgan": "^1.7.0",
+    "nedb": "^1.8.0",
+    "pdf-image": "^1.1.0",
+    "request": "^2.72.0",
+    "unpack-all": "0.0.4"
+  }
+}

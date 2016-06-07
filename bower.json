@@ -1,0 +1,14 @@
+{
+  "name": "jul11co-collectibles",
+  "version": "0.0.1",
+  "dependencies": {
+    "bootstrap": "~3.3.6",
+    "font-awesome": "~4.5.0",
+    "jquery": "^2.2.0",
+    "moment": "^2.11.2",
+    "handlebars": "^4.0.5",
+    "PACE": "pace#^1.0.2",
+    "rangeslider.js": "^2.1.1",
+    "bootstrap-rowequalizer": "^1.0.2"
+  }
+}
