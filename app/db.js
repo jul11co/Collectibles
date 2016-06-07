@@ -1,9 +1,12 @@
 var path = require('path');
 var async = require('async');
+var fse = require('fs-extra');
 
 var Datastore = require('nedb');
 
 var config = require('./config');
+
+fse.ensureDirSync(config.getDataFolder());
 
 var magazinedb = new Datastore({ 
   filename: config.getDataPath('magazines.db'), 
