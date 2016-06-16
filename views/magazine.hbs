@@ -54,7 +54,11 @@
 				<img class="cover-image" src="{{this.cover_image}}">
 			{{/if}}
 				<h5 class="title">{{this.name}}</h5>
-				<p class="subtitle">{{this.release_year}} - {{this.pages}} pages</p>
+				<p class="subtitle">
+				{{#if this.release_year}}
+				{{this.release_year}} - 
+				{{/if}}
+				{{this.pages}} pages</p>
 			</div>
 			</div>
 		{{/each}}

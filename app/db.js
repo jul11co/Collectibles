@@ -50,12 +50,12 @@ bookdb.ensureIndex({ fieldName: 'md5sum' }, function (err) {
 
 // magazine object
 // {
-//   name: String,
-//   description: String,
-//   cover_image: String,
-//   publisher: String,
-//   issues_per_year: Number,
-//   category: [String]
+//   name: String,             // REQUIRED
+//   description: String,      // OPTIONAL
+//   cover_image: String,      // OPTIONAL
+//   publisher: String,        // OPTIONAL
+//   issues_per_year: Number,  // OPTIONAL
+//   category: [String]        // OPTIONAL
 // }
 exports.addMagazine = function(magazine, callback) {
   var mag = {};
@@ -155,18 +155,17 @@ exports.removeMagazine = function(condition, options, callback) {
 //
 // magazine issue object
 // {
-//   md5sum: String,
-//   filepath: String,
-//   filename: String,
-//   filetype: String,
-//   filesize: Number, // in bytes
-//   folder: String,
-//   magazine: String, // id of magazine
-//   name: String,
-//   cover_image: String,
-//   pages: Number,
-//   release_year: Number,
-//   release_date: Date
+//   md5sum: String,          // REQUIRED
+//   filepath: String,        // REQUIRED
+//   filename: String,        // OPTIONAL
+//   filetype: String,        // OPTIONAL
+//   filesize: Number,        // REQUIRED, in bytes
+//   folder: String,          // OPTIONAL
+//   name: String,            // REQUIRED
+//   cover_image: String,     // REQUIRED
+//   pages: Number,           // REQUIRED
+//   release_year: Number,    // OPTIONAL
+//   release_date: Date       // OPTIONAL
 // }
 exports.addMagazineIssue = function(magazine, issue, options, callback) {
   if (typeof options == 'function') {
@@ -367,16 +366,16 @@ exports.removeMagazineIssue = function(condition, options, callback) {
 
 // comic serie object
 // {
-//   name: String,
-//   description: String,
-//   cover_image: String,
-//   year_begin: Number,
-//   year_end: Number,
-//   issues_count: Number,
-//   publisher: String,
-//   characters: [String],
-//   authors: [String],
-//   category: [String]
+//   name: String,            // REQUIRED
+//   description: String,     // OPTIONAL
+//   cover_image: String,     // OPTIONAL
+//   year_begin: Number,      // OPTIONAL
+//   year_end: Number,        // OPTIONAL
+//   issues_count: Number,    // OPTIONAL
+//   publisher: String,       // OPTIONAL
+//   characters: [String],    // OPTIONAL
+//   authors: [String],       // OPTIONAL
+//   category: [String]       // OPTIONAL
 // }
 exports.addComicSerie = function(serie, callback) {
   var ser = {};
@@ -478,20 +477,19 @@ exports.removeComicSerie = function(condition, options, callback) {
 //
 // comic issue object
 // {
-//   md5sum: String,
-//   filepath: String,
-//   filename: String,
-//   filetype: String,
-//   filesize: Number, // in bytes
-//   folder: String,
-//   serie: String, // id of serie
-//   name: String,
-//   cover_image: String,
-//   issue_no: String,
-//   volume_no: String,
-//   pages: Number,
-//   release_year: Number,
-//   release_date: Date
+//   md5sum: String,          // REQUIRED
+//   filepath: String,        // REQUIRED
+//   filename: String,        // OPTIONAL
+//   filetype: String,        // OPTIONAL
+//   filesize: Number,        // REQUIRED, in bytes
+//   folder: String,          // OPTIONAL
+//   name: String,            // REQUIRED
+//   cover_image: String,     // REQUIRED
+//   issue_no: String,        // OPTIONAL
+//   volume_no: String,       // OPTIONAL
+//   pages: Number,           // REQUIRED
+//   release_year: Number,    // OPTIONAL
+//   release_date: Date       // OPTIONAL
 // }
 exports.addComicIssue = function(serie, issue, options, callback) {
   if (typeof options == 'function') {
@@ -696,20 +694,20 @@ exports.removeComicIssue = function(condition, options, callback) {
 
 // book object
 // {
-//   md5sum: String,
-//   filepath: String,
-//   filename: String,
-//   filetype: String,
-//   filesize: Number, // in bytes
-//   folder: String,
-//   name: String,
-//   description: String,
-//   cover_image: String,
-//   pages: Number,
-//   release_year: Number,
-//   release_date: Date,
-//   publisher: String,
-//   category: [String]
+//   md5sum: String,          // REQUIRED
+//   filepath: String,        // REQUIRED
+//   filename: String,        // OPTIONAL
+//   filetype: String,        // OPTIONAL
+//   filesize: Number,        // REQUIRED, in bytes
+//   folder: String,          // OPTIONAL
+//   name: String,            // REQUIRED
+//   description: String,     // OPTIONAL
+//   cover_image: String,     // REQUIRED
+//   pages: Number,           // REQUIRED
+//   release_year: Number,    // OPTIONAL
+//   release_date: Date,      // OPTIONAL
+//   publisher: String,       // OPTIONAL
+//   category: [String]       // OPTIONAL
 // }
 exports.addBook = function(book_info, options, callback) {
   if (typeof options == 'function') {

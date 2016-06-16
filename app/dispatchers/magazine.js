@@ -54,10 +54,10 @@ MagazineDispatcher.prototype.dispatch = function(file, options, callback) {
     console.log('No name detected!');
     return callback(new Error('No name detected!'));
   }
-  if (!mag.year) {
-    console.log('No year detected!');
-    return callback(new Error('No year detected!'));
-  }
+  // if (!mag.year) {
+  //   console.log('No year detected!');
+  //   return callback(new Error('No year detected!'));
+  // }
 
   var mag_info = {
     name: mag.name
@@ -69,15 +69,17 @@ MagazineDispatcher.prototype.dispatch = function(file, options, callback) {
     filepath: file.path,
     filename: file.name,
     filesize: file.size,
-    name: mag.basename,
-    release_year: parseInt(mag.year)
+    name: mag.basename
   };
 
-  issue_info.release_date = new Date(issue_info.release_year, 0, 1, 0, 0, 0, 0);
-  if (mag.month) {
-    var month = monthMap[mag.month];
-    if (!isNaN(month)) {
-      issue_info.release_date.setMonth(month);
+  if (mag.year) {
+    issue_info.release_year = parseInt(mag.year);
+    issue_info.release_date = new Date(issue_info.release_year, 0, 1, 0, 0, 0, 0);
+    if (mag.month) {
+      var month = monthMap[mag.month];
+      if (!isNaN(month)) {
+        issue_info.release_date.setMonth(month);
+      }
     }
   }
 

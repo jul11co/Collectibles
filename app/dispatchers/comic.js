@@ -26,10 +26,10 @@ ComicDispatcher.prototype.dispatch = function(file, options, callback) {
     console.log('No name detected!');
     return callback(new Error('No name detected'));
   }
-  if (!comic.year) {
-    console.log('No year detected!');
-    return callback(new Error('No year detected'));
-  }
+  // if (!comic.year) {
+  //   console.log('No year detected!');
+  //   return callback(new Error('No year detected'));
+  // }
 
   var series_info = {
     name: comic.name
@@ -41,9 +41,13 @@ ComicDispatcher.prototype.dispatch = function(file, options, callback) {
     filesize: file.size,
 
     name: comic.name,
-    release_year: parseInt(comic.year),
     format: comic.format
   };
+
+  if (comic.year) {
+    issue_info.release_year = parseInt(comic.year);
+    issue_info.release_date = new Date(issue_info.release_year, 0, 1, 0, 0, 0, 0);
+  }
 
   if (comic.issue) {
     issue_info.issue_no = comic.issue;
@@ -53,8 +57,6 @@ ComicDispatcher.prototype.dispatch = function(file, options, callback) {
     issue_info.volume_no = comic.volume;
     issue_info.name += ' Vol. ' + comic.volume;
   }
-
-  issue_info.release_date = new Date(issue_info.release_year, 0, 1, 0, 0, 0, 0);
 
   // console.log(issue_info);
   // return callback();

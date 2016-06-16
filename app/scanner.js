@@ -121,106 +121,6 @@ var dispatchFile = function(file, options, callback) {
   });
 }
 
-// var RESULT = {};
-// var COUNT = {
-//   files: 0,
-//   dirs : 0,
-//   errors: 0
-// };
-// var ERRORS = [];
-
-// var scanDir = function(abspath, callback) {
-//   console.log('D:', ellipsisMiddle(abspath));
-//   COUNT['dirs']++;
-//   fs.readdir(abspath, function(err, files) {
-//     if (err) return callback(err);
-//     async.eachSeries(files, function(file, cb) {
-//       if (file.indexOf('.') == 0) {
-//         return cb();
-//       }
-//       var stats = fs.lstatSync(path.join(abspath, file));
-//       // console.log(stats);
-//       if (stats.isFile()) {
-//         var file_abs_path = path.join(abspath, file);
-
-//         scannerdb.get(file_abs_path, function(err, value) {
-//           if (err) return cb(err);
-//           if (value && !options.rescan) return cb();
-
-//           var file_path = path.relative(INPUT_DIR, file_abs_path);
-//           var file_type = 'file/' + path.extname(file_path).replace('.','');
-//           console.log('F:', ellipsisMiddle(file_path));
-          
-//           var file_info = {
-//             path: file_abs_path,
-//             name: file,
-//             type: file_type,
-//             size: stats['size']
-//           };
-
-//           RESULT[file_abs_path] = file_info;
-//           COUNT['files']++;
-
-//           dispatchFile(file_info, options, function(err) {
-//             if (err) {
-//               console.log('dispatch error:', file_info.path);
-//               COUNT['errors']++;
-//               ERRORS.push(file_info.path);
-//               if (options.ignore_errors) {
-//                 // console.log(err);
-//                 return cb();
-//               }
-//               return cb(err);
-//             } else {
-//               scannerdb.set(file_info.path, file_info, function(err) {
-//                 if (err) return cb(err);
-//                 cb();
-//               });
-//             }
-//           });
-
-//         });
-//       } else if (stats.isDirectory()) {
-//         var dir_abs_path = path.join(abspath, file);
-//         // var dir_path = path.relative(INPUT_DIR, dir_abs_path);
-//         // console.log('Directory:', dir_path);
-//         // RESULT[dir_path] = {
-//         //   type: 'd',
-//         //   stats: getStats(stats)
-//         // };
-//         scanDir(dir_abs_path, function(err) {
-//           if (err) return cb(err);
-//           cb();
-//         });
-//       } else {
-//         cb();
-//       }
-//     }, function(err) {
-//       callback(null, RESULT, COUNT);
-//     });
-//   });
-// }
-
-// scanDir(INPUT_DIR, function(err, result, count) {
-//   if (err) {
-//     console.log(err);
-//     process.exit();
-//   } else {
-//     if (count) {
-//       console.log(count['dirs'] + ' directories, ' + count['files'] + ' files.');
-//       console.log(count['errors'] + ' errors.');
-//     }
-//     if (ERRORS.length) {
-//       ERRORS.forEach(function(error) {
-//         console.log(error);
-//       });
-//     } else {
-//       console.log('Done.');
-//     }
-//     process.exit();
-//   }
-// });
-
 var scanDirRecursive = function(abspath, options, callback) {
   if (typeof options == 'function') {
     callback = options;
@@ -243,7 +143,16 @@ var scanDirRecursive = function(abspath, options, callback) {
       }
 
       var file_abs_path = path.join(abspath, file);
-      var stats = fs.lstatSync(file_abs_path);
+
+      var stats = undefined;
+      try {
+        stats = fs.lstatSync(file_abs_path);
+      } catch(e) {
+        console.log(e);
+        return cb();
+      }
+      if (!stats) return cb();
+      
       // console.log(stats);
       if (stats.isFile()) {
           var file_type = path.extname(file).replace('.','');

@@ -70,7 +70,11 @@
 				<img class="cover-image" src="{{this.cover_image}}">
 			{{/if}}
 				<h5 class="title">{{this.name}}</h5>
-				<p class="subtitle">{{this.release_year}} - {{this.pages}} pages</p>
+				<p class="subtitle">
+				{{#if this.release_year}}
+				{{this.release_year}} - 
+				{{/if}}
+				{{this.pages}} pages</p>
 			</div>
 			</div>
 		{{/each}}
@@ -81,15 +85,15 @@
 			<div class="col-md-12">
 		{{#equal query.sort 'added_date'}}
 			{{#if skip}}
-				<a href="/magazine_issues?sort=added_date&skip={{math skip '+' issues.length}}" onclick="loadInplace(this);return false;" class="btn btn-primary">More</a>
+				<a href="/magazine_issues?sort=added_date&skip={{math skip '+' issues.length}}" onclick="loadInplace(this);return false;" class="btn btn-primary">More Issues</a>
 			{{else}}
-				<a href="/magazine_issues?sort=added_date&skip={{issues.length}}" onclick="loadInplace(this);return false;" class="btn btn-primary">More</a>
+				<a href="/magazine_issues?sort=added_date&skip={{issues.length}}" onclick="loadInplace(this);return false;" class="btn btn-primary">More Issues</a>
 			{{/if}}
 		{{else}}
 			{{#if skip}}
-				<a href="/magazine_issues?skip={{math skip '+' issues.length}}" onclick="loadInplace(this);return false;" class="btn btn-primary">More</a>
+				<a href="/magazine_issues?skip={{math skip '+' issues.length}}" onclick="loadInplace(this);return false;" class="btn btn-primary">More Issues</a>
 			{{else}}
-				<a href="/magazine_issues?skip={{issues.length}}" onclick="loadInplace(this);return false;" class="btn btn-primary">More</a>
+				<a href="/magazine_issues?skip={{issues.length}}" onclick="loadInplace(this);return false;" class="btn btn-primary">More Issues</a>
 			{{/if}}
 		{{/equal}}
 			</div>

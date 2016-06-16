@@ -295,7 +295,7 @@ exports.viewMagazineIssues = function(req, res, next) {
 //     name: String, // REQUIRED
 //     cover_image: String, // REQUIRED
 //     pages: Number, // REQUIRED
-//     release_year: Number, // REQUIRED
+//     release_year: Number, // OPTIONAL
 //     release_date: Date // OPTIONAL
 //   }
 // }

@@ -9,6 +9,7 @@
     "handlebars": "^4.0.5",
     "PACE": "pace#^1.0.2",
     "rangeslider.js": "^2.1.1",
-    "bootstrap-rowequalizer": "^1.0.2"
+    "bootstrap-rowequalizer": "^1.0.2",
+    "slick-carousel": "^1.6.0"
   }
 }

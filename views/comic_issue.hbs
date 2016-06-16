@@ -45,10 +45,12 @@
 	<div class="col-md-8 col-sm-6">
 		<h2 class="issue-title"><span>{{issue.name}}</span></h2>
 		<hr/>
+	{{#if issue.release_year}}
 		<div class="metadata">
 			<span class="metadata-label">Release Year</span>
 			<span>{{issue.release_year}}</span>
 		</div>
+	{{/if}}
 	{{#if serie}}
 		<div class="metadata">
 			<span class="metadata-label">Series</span>

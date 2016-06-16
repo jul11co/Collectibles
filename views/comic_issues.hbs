@@ -83,15 +83,15 @@
 			<div class="col-md-12">
 		{{#equal query.sort 'added_date'}}
 			{{#if skip}}
-			<a href="/comic_issues?sort=added_date&skip={{math skip '+' issues.length}}" onclick="loadInplace(this);return false;" class="btn btn-primary">More</a>
+			<a href="/comic_issues?sort=added_date&skip={{math skip '+' issues.length}}" onclick="loadInplace(this);return false;" class="btn btn-primary">More Issues</a>
 			{{else}}
-			<a href="/comic_issues?sort=added_date&skip={{issues.length}}" onclick="loadInplace(this);return false;" class="btn btn-primary">More</a>
+			<a href="/comic_issues?sort=added_date&skip={{issues.length}}" onclick="loadInplace(this);return false;" class="btn btn-primary">More Issues</a>
 			{{/if}}
 		{{else}}
 			{{#if skip}}
-			<a href="/comic_issues?skip={{math skip '+' issues.length}}" onclick="loadInplace(this);return false;" class="btn btn-primary">More</a>
+			<a href="/comic_issues?skip={{math skip '+' issues.length}}" onclick="loadInplace(this);return false;" class="btn btn-primary">More Issues</a>
 			{{else}}
-			<a href="/comic_issues?skip={{issues.length}}" onclick="loadInplace(this);return false;" class="btn btn-primary">More</a>
+			<a href="/comic_issues?skip={{issues.length}}" onclick="loadInplace(this);return false;" class="btn btn-primary">More Issues</a>
 			{{/if}}
 		{{/equal}}
 			</div>

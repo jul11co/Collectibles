@@ -95,7 +95,7 @@ app.use("/pace", express.static(path.join(__dirname, '..', 'public/libs/PACE/'))
 app.use("/handlebars", express.static(path.join(__dirname, '..', 'public/libs/handlebars/')));
 app.use("/rangeslider", express.static(path.join(__dirname, '..', 'public/libs/rangeslider.js/dist/')));
 app.use("/bootstrap-rowequalizer", express.static(path.join(__dirname, '..', 'public/libs/bootstrap-rowequalizer/')));
-// app.use("/file", express.static(ROOT_PATH));
+app.use("/slick-carousel", express.static(path.join(__dirname, '..', 'public/libs/slick-carousel/slick/')));
 
 // Make stuff accessible to our router
 app.use(function (req, res, next) {
@@ -120,7 +120,7 @@ var db = require('./db');
 router.get('/', function(req, res, next) {
   async.series({
     readinglist_entries: function(cb) {
-      db.getReadingList({limit: 6}, function(err, entries) {
+      db.getReadingList({limit: 18}, function(err, entries) {
         if (err) return cb(err);
         cb(null, entries);
       });
@@ -132,7 +132,7 @@ router.get('/', function(req, res, next) {
       });
     },
     magazine_issues: function(cb) {
-      db.getRecentPublishedMagazineIssues({limit: 12}, function(err, issues) {
+      db.getRecentPublishedMagazineIssues({limit: 24}, function(err, issues) {
         if (err) return cb(err);
         cb(null, issues);
       });
@@ -144,7 +144,7 @@ router.get('/', function(req, res, next) {
       });
     },
     comic_issues: function(cb) {
-      db.getRecentPublishedComicIssues({limit: 12,sort:{release_date:-1,name:-1}}, function(err, issues) {
+      db.getRecentPublishedComicIssues({limit: 24,sort:{release_date:-1,name:-1}}, function(err, issues) {
         if (err) return cb(err);
         cb(null, issues);
       });
@@ -156,7 +156,7 @@ router.get('/', function(req, res, next) {
       });
     },
     books: function(cb) {
-      db.getRecentAddedBooks({limit: 12}, function(err, books) {
+      db.getRecentAddedBooks({limit: 24}, function(err, books) {
         if (err) return cb(err);
         cb(null, books);
       });
