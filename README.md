@@ -16,8 +16,13 @@ Managing personal digital collections of magazines, books & comics.
 ###INSTALL
 
 Checkout this repository to local directory.
-
 ```
+git clone https://github.com/jul11co/Collectibles.git
+```
+
+Install packages
+```
+cd Collectibles
 npm install
 bower install
 npm link
