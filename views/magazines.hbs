@@ -8,7 +8,8 @@
 	<div class="col-md-12">
 		<h3 class="breadcrumb">
 			<div class="dropdown dropdown-inline">
-			  <a class="dropdown-toggle" type="button" data-toggle="dropdown">Magazines
+			  <a href="/magazines" onclick="loadInplace(this);return false;">Magazines</a>
+			  <a class="dropdown-toggle" type="button" data-toggle="dropdown">|
 			  <span class="caret"></span></a>
 			  <ul class="dropdown-menu">
 			    <li><a href="/magazines" onclick="loadInplace(this);return false;">Magazines</a></li>
@@ -52,25 +53,29 @@
 
 			{{#if this.issues}}
 			<div class="col-md-12">
-			{{#each this.issues}}
+				{{#if this.issues.length}}
 				<div class="issue">
-					<div class="actions">
-						<a href="/magazine_issues/{{this._id}}" onclick="loadInplace(this);return false;" class="btn btn-default btn-block"><i class="fa fa-info fa-w"></i> Info</a>
-						<a href="/read/magazine/{{this._id}}" class="btn btn-default btn-block"><i class="fa fa-eye fa-w"></i> Read</a> 
-						<!-- <a href="/magazines/{{this.magazine}}" class="btn btn-default btn-block">Magazine</a> -->
-						<!-- <a href="/magazine_issues/{{this._id}}/delete" class="btn btn-danger btn-block">Delete</a> -->
+					<div class="actions hidden">
+						<a href="/magazine_issues/{{this.issues.0._id}}" onclick="loadInplace(this);return false;" class="btn btn-default btn-block"><i class="fa fa-info fa-w"></i> Info</a>
+						<a href="/read/magazine/{{this.issues.0._id}}" class="btn btn-default btn-block"><i class="fa fa-eye fa-w"></i> Read</a> 
+						<!-- <a href="/magazines/{{this.issues.0.magazine}}" class="btn btn-default btn-block">Magazine</a> -->
+						<!-- <a href="/magazine_issues/{{this.issues.0._id}}/delete" class="btn btn-danger btn-block">Delete</a> -->
 					</div>
-				{{#if this.cover_image}}
-					<img class="cover-image" src="{{this.cover_image}}">
+				{{#if this.issues.0.cover_image}}
+					<a href="/magazines/{{this._id}}" onclick="loadInplace(this);return false;">
+					<img class="cover-image" src="{{this.issues.0.cover_image}}">
+					</a>
 				{{/if}}
-					<!-- <h5 class="title">{{this.name}}</h5>
+					<!-- <h5 class="title">{{this.issues.0.name}}</h5>
 					<p class="subtitle">{{this.release_year}} - {{this.pages}} pages</p> -->
+					<h5 class="title"><a href="/magazines/{{this._id}}" onclick="loadInplace(this);return false;">{{this.name}}</a></h5>
+					<p class="subtitle">{{this.issues.0.name}}</p>
 				</div>
-			{{/each}}
+				{{/if}}
 			</div>
 			{{/if}}
 
-			<div class="col-md-12">
+			<div class="col-md-12 hidden">
 				<div class="magazine">
 			{{#if this.cover_image}}
 					<img class="cover-image" src="{{this.cover_image}}">

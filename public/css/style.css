@@ -179,11 +179,13 @@ a:hover, a:active {
 
 .issue {
   margin-top: 10px;
-	margin-bottom: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
   /*background-color: white;*/
   /*box-shadow: 0 5px 10px rgba(38, 50, 56, 0.2);*/
   position: relative;
 }
+
 /*.issue:hover {
   box-shadow: 0 18px 22px rgba(38, 50, 56, 0.2);
 }*/
@@ -260,13 +262,30 @@ a:hover, a:active {
   /*box-shadow: #000 0 1px 3px, #fff 0 0 0 1px;*/
   box-shadow: 0 5px 10px rgba(38, 50, 56, 0.2);
 }
-.issue .cover-image:hover {
+/*.issue .cover-image:hover {
   box-shadow: 0 18px 22px rgba(38, 50, 56, 0.2);
+}*/
+
+.issue:hover {
+  transition: background-color 0.5s ease;
+  background-color: white;
+}
+.issue:hover .title,
+.issue:hover .title a {
+  color: #333;
+}
+.issue:hover .title a:hover,
+.issue:hover .title a:active,
+.issue:hover .title a:focus {
+  color: #666;
+}
+.issue .cover-image {
+  border: none;
 }
 
 .cover-image-big {
   width: 100%;
-  border: 1px solid #a9a9a9;
+  /*border: 1px solid #a9a9a9;*/
   background-color: #fff;
   box-shadow: 0 18px 22px rgba(38, 50, 56, 0.2);
   margin-bottom: 20px;

@@ -33,13 +33,15 @@
 			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
 			{{#equal this.doc_type 'magazine'}}
 			<div class="issue">
-				<div class="actions">
+				<div class="actions hidden">
 					<a href="/magazine_issues/{{this.issue._id}}" onclick="loadInplace(this);return false;" class="btn btn-default btn-block"><i class="fa fa-info fa-w"></i> Info</a>
 					<a href="/read/magazine/{{this.issue._id}}" class="btn btn-default btn-block"><i class="fa fa-eye fa-w"></i> Read</a> 
 					<!-- <a href="/magazines/{{this.issue.magazine}}" class="btn btn-default btn-block">Magazine</a> -->
 				</div>
 			{{#if this.issue.cover_image}}
+				<a href="/magazine_issues/{{this.issue._id}}" onclick="loadInplace(this);return false;">
 				<img class="cover-image" src="{{this.issue.cover_image}}">
+				</a>
 			{{/if}}
 				<h5 class="title">{{this.issue.name}}</h5>
 				<p class="subtitle">{{this.issue.release_year}} - {{this.issue.pages}} pages</p>
@@ -47,13 +49,15 @@
 		{{else}}
 		{{#equal this.doc_type 'comic'}}
 			<div class="issue">
-				<div class="actions">
+				<div class="actions hidden">
 					<a href="/comic_issues/{{this.issue._id}}" onclick="loadInplace(this);return false;" class="btn btn-default btn-block"><i class="fa fa-info fa-w"></i> Info</a>
 					<a href="/read/comic/{{this.issue._id}}" class="btn btn-default btn-block"><i class="fa fa-eye fa-w"></i> Read</a> 
 					<!-- <a href="/comics/{{this.issue.serie}}" class="btn btn-default btn-block">Serie</a> -->
 				</div>
 			{{#if this.issue.cover_image}}
+				<a href="/comic_issues/{{this.issue._id}}" onclick="loadInplace(this);return false;">
 				<img class="cover-image" src="{{this.issue.cover_image}}">
+				</a>
 			{{/if}}
 				<h5 class="title">{{this.issue.name}}</h5>
 				<p class="subtitle">{{this.issue.release_year}} - {{this.issue.pages}} pages</p>
@@ -61,12 +65,14 @@
 		{{else}}
 		{{#equal this.doc_type 'book'}}
 			<div class="issue">
-				<div class="actions">
+				<div class="actions hidden">
 					<a href="/books/{{this.book._id}}" onclick="loadInplace(this);return false;" class="btn btn-default btn-block"><i class="fa fa-info fa-w"></i> Info</a>
 					<a href="/read/book/{{this.book._id}}" class="btn btn-default btn-block"><i class="fa fa-eye fa-w"></i> Read</a> 
 				</div>
 			{{#if this.book.cover_image}}
+				<a href="/books/{{this.book._id}}" onclick="loadInplace(this);return false;">
 				<img class="cover-image" src="{{this.book.cover_image}}">
+				</a>
 			{{/if}}
 				<h5 class="title">{{this.book.name}}</h5>
 				<p class="subtitle">{{this.book.pages}} pages</p>

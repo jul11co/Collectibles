@@ -18,7 +18,8 @@
 	<div class="col-md-12">
 		<h3 class="breadcrumb">
 			<div class="dropdown dropdown-inline">
-			  <a class="dropdown-toggle" type="button" data-toggle="dropdown">ComicVine
+			  <a href="/comicvine" onclick="loadInplace(this);return false;">ComicVine</a>
+			  <a class="dropdown-toggle" type="button" data-toggle="dropdown">|
 			  <span class="caret"></span></a>
 			  <ul class="dropdown-menu">
 			    <li><a href="/magazines" onclick="loadInplace(this);return false;">Magazines</a></li>
@@ -53,13 +54,13 @@
 		{{#each issues}}
 			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
 			<div class="issue">
-				<div class="actions">
+				<div class="actions hidden">
 				{{#if this.id}}
 					<a href="/comicvine/issues/4000-{{this.id}}" onclick="loadInplace(this);return false;" class="btn btn-default btn-block"><i class="fa fa-info fa-w"></i> Info</a>
 				{{/if}}
 				{{#if this.volume}}
 					{{#if this.volume.name}}
-					<a href="/comicvine/search?q={{encodeURI this.volume.name}}&type=volume" onclick="loadInplace(this);return false;" class="btn btn-default btn-block"><i class="fa fa-search fa-w"></i> Volume</a>
+					<a href="/comicvine/volumes/4050-{{this.volume.id}}" onclick="loadInplace(this);return false;" class="btn btn-default btn-block">Volume</a>
 					{{/if}}
 				{{/if}}
 				{{#if this.site_detail_url}}
@@ -68,12 +69,14 @@
 				</div>
 			{{#if this.image}}
 				{{#if this.image.medium_url}}
+				<a href="/comicvine/issues/4000-{{this.id}}" onclick="loadInplace(this);return false;">
 				<img class="cover-image" src="{{this.image.medium_url}}">
+				</a>
 				{{/if}}
 			{{/if}}
 			{{#if this.volume}}
 				{{#if this.volume.name}}
-				<h5 class="title">{{this.volume.name}} #{{this.issue_number}}</h5>
+				<h5 class="title"><a href="/comicvine/issues/4000-{{this.id}}" onclick="loadInplace(this);return false;">{{this.volume.name}} #{{this.issue_number}}</a></h5>
 				{{/if}}
 				{{#if this.name}}
 				<p class="subtitle" style="margin-bottom: 0;">{{this.name}}</p>

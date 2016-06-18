@@ -16,7 +16,8 @@
 	<div class="col-md-12">
 		<h3 class="breadcrumb">
 			<div class="dropdown dropdown-inline">
-			  <a class="dropdown-toggle" type="button" data-toggle="dropdown">Comics
+			  <a href="/comics" onclick="loadInplace(this);return false;">Comics</a>
+			  <a class="dropdown-toggle" type="button" data-toggle="dropdown">|
 			  <span class="caret"></span></a>
 			  <ul class="dropdown-menu">
 			    <li><a href="/magazines" onclick="loadInplace(this);return false;">Magazines</a></li>
@@ -62,16 +63,18 @@
 		{{#each issues}}
 			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
 			<div class="issue">
-				<div class="actions">
+				<div class="actions hidden">
 					<a href="/comic_issues/{{this._id}}" onclick="loadInplace(this);return false;" class="btn btn-default btn-block"><i class="fa fa-info fa-w"></i> Info</a>
 					<a href="/read/comic/{{this._id}}" class="btn btn-default btn-block"><i class="fa fa-eye fa-w"></i> Read</a> 
 					<!-- <a href="/comics/{{this.serie}}" class="btn btn-default btn-block">Serie</a> -->
 					<!-- <a href="/comic_issues/{{this._id}}/delete" class="btn btn-danger btn-block">Delete</a> -->
 				</div>
 			{{#if this.cover_image}}
+				<a href="/comic_issues/{{this._id}}" onclick="loadInplace(this);return false;">
 				<img class="cover-image" src="{{this.cover_image}}">
+				</a>
 			{{/if}}
-				<h5 class="title">{{this.name}}</h5>
+				<h5 class="title"><a href="/comic_issues/{{this._id}}" onclick="loadInplace(this);return false;">{{this.name}}</a></h5>
 				<p class="subtitle">{{this.release_year}} - {{this.pages}} pages</p>
 			</div>
 			</div>

@@ -8,9 +8,10 @@
 	<div class="col-md-12">
 		<h3 class="breadcrumb">
 			<div class="dropdown dropdown-inline">
-			  <a class="dropdown-toggle" type="button" data-toggle="dropdown">Books
+			  <a href="/books" onclick="loadInplace(this);return false;">Books</a>
+			  <a class="dropdown-toggle" type="button" data-toggle="dropdown">|
 			  <span class="caret"></span></a>
-			  <ul class="dropdown-menu">
+			  <ul class="dropdown-menu dropdown-menu-center">
 			    <li><a href="/magazines" onclick="loadInplace(this);return false;">Magazines</a></li>
 			    <li><a href="/comics" onclick="loadInplace(this);return false;">Comics</a></li>
 			    <li><a href="/books" onclick="loadInplace(this);return false;">Books</a></li>
@@ -35,14 +36,16 @@
 		{{#each books}}
 			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
 			<div class="issue">
-				<div class="actions">
+				<div class="actions hidden">
 					<a href="/books/{{this._id}}" onclick="loadInplace(this);return false;" class="btn btn-default btn-block"><i class="fa fa-info fa-w"></i> Info</a>
 					<a href="/read/book/{{this._id}}" class="btn btn-default btn-block"><i class="fa fa-eye fa-w"></i> Read</a> 
 				</div>
 			{{#if this.cover_image}}
+				<a href="/books/{{this._id}}" onclick="loadInplace(this);return false;">
 				<img class="cover-image" src="{{this.cover_image}}">
+				</a>
 			{{/if}}
-				<h5 class="title">{{this.name}}</h5>
+				<h5 class="title"><a href="/books/{{this._id}}" onclick="loadInplace(this);return false;">{{this.name}}</a></h5>
 				<p class="subtitle">
 				{{#if this.release_year}}
 					{{this.release_year}} - 
